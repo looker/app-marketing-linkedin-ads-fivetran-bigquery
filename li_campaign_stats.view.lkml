@@ -1,7 +1,7 @@
 include: "li_ad_metrics_base.view"
 
-explore: campaign_stats {
-  from: campaign_stats
+explore: li_campaign_stats {
+  from: li_campaign_stats
   view_name: fact
   hidden: yes
   group_label: "LinkedIn Ads"
@@ -9,7 +9,7 @@ explore: campaign_stats {
   view_label: "Impressions"
 }
 
-view: campaign_stats {
+view: li_campaign_stats {
   extends: [linkedin_ads_config, date_base, period_base, li_ad_metrics_base]
   sql_table_name: {{ fact.linkedin_ads_schema._sql }}.campaign_stats ;;
 
