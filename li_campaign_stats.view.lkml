@@ -17,7 +17,6 @@ view: li_campaign_stats {
     hidden: yes
     type: date_raw
     sql: CAST(${TABLE}.day AS DATE) ;;
-    convert_tz: no
   }
 
   dimension: account_id_string {
