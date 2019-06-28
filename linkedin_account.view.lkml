@@ -1,6 +1,6 @@
 view: linkedin_account {
   extends: [linkedin_ads_config]
-  sql_table_name: {{ linkedin_ads_schema._sql }}.linkedin_ads.account_history ;;
+  sql_table_name: {{ linkedin_ads_schema._sql }}.account_history ;;
 
   dimension: id {
     primary_key: yes
@@ -118,17 +118,5 @@ view: linkedin_account {
   measure: count {
     type: count
     drill_fields: [id, name]
-  }
-}
-
-explore: linkedin_account_join {
-  extension: required
-
-  join: account {
-    from: linkedin_account
-    view_label: "Account"
-    sql_on: ${fact.account_id} = ${account.id} AND
-      ${fact._date} = ${account._date_date} ;;
-    relationship: many_to_one
   }
 }
