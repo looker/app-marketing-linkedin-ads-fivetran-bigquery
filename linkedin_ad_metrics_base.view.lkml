@@ -1,4 +1,4 @@
-view: li_ad_metrics_base {
+view: linkedin_ad_metrics_base {
   extension: required
   extends: [ad_metrics_base]
 
