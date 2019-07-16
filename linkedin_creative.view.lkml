@@ -132,9 +132,6 @@ view: linkedin_creative {
     sql: ${TABLE}.last_modified_time ;;
   }
 
-  # dimension: _date {
-  #   type: date  }
-
   dimension: logo {
     type: string
     sql: ${TABLE}.logo ;;
