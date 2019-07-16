@@ -1,6 +1,18 @@
 view: linkedin_campaign_group {
   extends: [linkedin_ads_config]
-  sql_table_name: {{ linkedin_ads_schema._sql }}.linkedin_ads.campaign_group_history ;;
+  derived_table: {
+    sql:
+    (
+    SELECT campaign_group_history.* FROM `{{ campaign_group.linkedin_ads_schema._sql }}.campaign_group_history` as campaign_group_history
+    INNER JOIN (
+    SELECT
+    id, max(last_modified_time) as max_fivetran_synced
+    FROM `{{ campaign_group.linkedin_ads_schema._sql }}.campaign_group_history`
+    GROUP BY id) max_campaign_group_history
+    ON max_campaign_group_history.id = campaign_group_history.id
+    AND max_campaign_group_history.max_fivetran_synced = campaign_group_history.last_modified_time
+    ) ;;
+  }
 
   dimension: id {
     primary_key: yes

@@ -1,6 +1,18 @@
 view: linkedin_account {
   extends: [linkedin_ads_config]
-  sql_table_name: {{ linkedin_ads_schema._sql }}.account_history ;;
+  derived_table: {
+    sql:
+    (
+    SELECT account_history.* FROM `{{ account.linkedin_ads_schema._sql }}.account_history` as account_history
+    INNER JOIN (
+    SELECT
+    id, max(last_modified_time) as max_fivetran_synced
+    FROM `{{ account.linkedin_ads_schema._sql }}.account_history`
+    GROUP BY id) max_account_history
+    ON max_account_history.id = account_history.id
+    AND max_account_history.max_fivetran_synced = account_history.last_modified_time
+    ) ;;
+  }
 
   dimension: id {
     primary_key: yes

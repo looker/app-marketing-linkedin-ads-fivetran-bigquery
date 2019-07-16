@@ -1,6 +1,18 @@
 view: linkedin_creative {
   extends: [linkedin_ads_config]
-  sql_table_name: {{ linkedin_ads_schema._sql }}.creative_history ;;
+  derived_table: {
+    sql:
+    (
+    SELECT creative_history.* FROM `{{ ad.linkedin_ads_schema._sql }}.creative_history` as creative_history
+    INNER JOIN (
+    SELECT
+    id, max(last_modified_time) as max_fivetran_synced
+    FROM `{{ ad.linkedin_ads_schema._sql }}.creative_history`
+    GROUP BY id) max_creative_history
+    ON max_creative_history.id = creative_history.id
+    AND max_creative_history.max_fivetran_synced = creative_history.last_modified_time
+    ) ;;
+  }
 
   dimension: id {
     primary_key: yes
