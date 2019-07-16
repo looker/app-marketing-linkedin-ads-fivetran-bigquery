@@ -274,7 +274,7 @@ explore: linkedin_ad_impressions_ad_adapter {
     view_label: "Ad"
     sql_on:
       ${ad.id} = ${fact.ad_id} AND
-      ${ad._date_date} = ${fact._date};;
+      ${ad._date_date} <= ${fact._date};;
     relationship:  many_to_one
   }
 
@@ -282,7 +282,7 @@ explore: linkedin_ad_impressions_ad_adapter {
     from: linkedin_campaign
     view_label: "Campaign"
     sql_on: ${ad.campaign_id} = ${campaign.id} AND
-      ${ad._date_date} = ${campaign._date_date} ;;
+      ${ad._date_date} <= ${campaign._date_date} ;;
     relationship: many_to_one
   }
 

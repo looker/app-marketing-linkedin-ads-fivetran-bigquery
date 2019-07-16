@@ -1,6 +1,17 @@
 view: linkedin_video_ad {
-  sql_table_name: linkedin_ads.video_ad_history ;;
-
+  derived_table: {
+    sql:
+    (
+    SELECT video_ad_history.* FROM `{{ video_ad.linkedin_ads_schema._sql }}.video_ad_history` as video_ad_history
+    INNER JOIN (
+    SELECT
+    id, max(last_modified_time) as max_fivetran_synced
+    FROM `{{ video_ad.linkedin_ads_schema._sql }}.video_ad_history`
+    GROUP BY id) max_video_history
+    ON max_video_history.id = video_ad_history.id
+    AND max_video_history.max_fivetran_synced = video_ad_history.last_modified_time
+    ) ;;
+  }
   dimension: id {
     primary_key: yes
     type: number
