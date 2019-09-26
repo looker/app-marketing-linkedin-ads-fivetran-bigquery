@@ -39,6 +39,11 @@ view: linkedin_campaign {
     sql: ${TABLE}.account_id ;;
   }
 
+  dimension: account_id_string {
+    hidden: yes
+    sql: CAST(${TABLE}.account_id as STRING) ;;
+  }
+
   dimension: associated_entity {
     type: string
     sql: ${TABLE}.associated_entity ;;
