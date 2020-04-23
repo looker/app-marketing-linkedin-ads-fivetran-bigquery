@@ -222,6 +222,7 @@ view: linkedin_ad_metrics_base_dimensions {
 explore: linkedin_ad_impressions_campaign_adapter {
   from: linkedin_ad_impressions_campaign_adapter
   view_name: fact
+  extension: required
   group_label: "Linkedin Ads"
   label: "Linkedin Ads Impressions by Campaign"
   view_label: "Impressions by Campaign"
@@ -264,6 +265,7 @@ view: linkedin_ad_impressions_campaign_adapter_base {
 explore: linkedin_ad_impressions_ad_adapter {
   from: linkedin_ad_impressions_ad_adapter
   view_name: fact
+  extension: required
   group_label: "Linkedin Ads"
   label: "Linkedin Ads Impressions by Ad"
   view_label: "Impressions by Ad"
