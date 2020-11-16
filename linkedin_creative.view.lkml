@@ -184,12 +184,12 @@ view: linkedin_creative {
 
   dimension: text {
     type: string
-    sql: ${TABLE}.text ;;
+    sql: ${TABLE}.text_ad_text ;;
   }
 
   dimension: title {
     type: string
-    sql: ${TABLE}.title ;;
+    sql: ${TABLE}.text_ad_title ;;
   }
 
   dimension: type {
